@@ -1,6 +1,6 @@
 {
-    "name": "vendor/project",
-    "description": "A description of the library",
+    "name": "wellrested/http-exceptions",
+    "description": "A collection of exceptions that correspond to common HTTP error status codes",
     "license": "MIT",
     "type": "library",
     "authors": [
