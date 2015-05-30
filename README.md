@@ -20,16 +20,14 @@ Provided exception classes with `$code` and `$message` are:
 | ConflictException         |  409 | "409 Conflict"              |
 | GoneException             |  410 | "410 Gone"                  |
 
-
-
 ```php
 
 try {
     // ... 
 } catch (\WellRESTed\HttpExceptions\HttpException $e) {
     $response = $response
-        ->withStatus($e->code)
-        ->withBody(new \WellRESTed\Message\Stream($e->message));
+        ->withStatus($e->getCode())
+        ->withBody(new \WellRESTed\Message\Stream($e->getMessage()));
 }
 
 ```
