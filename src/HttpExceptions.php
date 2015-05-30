@@ -1,16 +1,13 @@
 <?php
 
 /**
- * HttpException and its subclasses provides exceptions that correspond to HTTP
- * error status codes. The most common are included, but you may create
- * additional subclasses if needed by subclassing HttpException.
+ * HttpException and its subclasses provide exceptions corresponding to HTTP
+ * error status codes. The most common are included, but you can create
+ * exceptions for other status codes by using (or subclassing) HttpException
+ * and providing the reason phrase as the $message and the status code as the
+ * $code.
  *
- * The HttpException classes are intended to be used with Routers or Handler
- * subclasses (pjdietz\WellRESTed\Handler). These classes will catch
- * HttpExceptions and convert them to responses using the exception's code as
- * the HTTP status code and the exception's message as the response body.
- *
- * @author PJ Dietz <pj@pjdietz.com>
+ * @author PJ Dietz <pjdietz@gmail.com>
  * @copyright Copyright 2015 by PJ Dietz
  * @license MIT
  */
@@ -26,8 +23,8 @@ class HttpException extends Exception
 {
     /** @var int HTTP Status Code */
     protected $code = 500;
-    /** @var string Default description for the error */
-    protected $message = "500 Internal Server Error";
+    /** @var string Reason Phrase */
+    protected $message = "Internal Server Error";
 }
 
 /**
@@ -35,21 +32,17 @@ class HttpException extends Exception
  */
 class BadRequestException extends HttpException
 {
-    /** @var int HTTP Status Code */
     protected $code = 400;
-    /** @var string Default description for the error */
-    protected $message = "400 Bad Request";
+    protected $message = "Bad Request";
 }
 
 /**
- * Represents a 401 Unauthorization error.
+ * Represents a 401 Unauthorized error.
  */
 class UnauthorizedException extends HttpException
 {
-    /** @var int HTTP Status Code */
     protected $code = 401;
-    /** @var string Default description for the error */
-    protected $message = "401 Unauthorized";
+    protected $message = "Unauthorized";
 }
 
 /**
@@ -57,10 +50,8 @@ class UnauthorizedException extends HttpException
  */
 class ForbiddenException extends HttpException
 {
-    /** @var int HTTP Status Code */
     protected $code = 403;
-    /** @var string Default description for the error */
-    protected $message = "403 Forbidden";
+    protected $message = "Forbidden";
 }
 
 /**
@@ -68,10 +59,8 @@ class ForbiddenException extends HttpException
  */
 class NotFoundException extends HttpException
 {
-    /** @var int HTTP Status Code */
     protected $code = 404;
-    /** @var string Default description for the error */
-    protected $message = "404 Not Found";
+    protected $message = "Not Found";
 }
 
 /**
@@ -79,10 +68,17 @@ class NotFoundException extends HttpException
  */
 class MethodNotAllowedException extends HttpException
 {
-    /** @var int HTTP Status Code */
     protected $code = 405;
-    /** @var string Default description for the error */
-    protected $message = "405 Method Not Allowed";
+    protected $message = "Method Not Allowed";
+}
+
+/**
+ * Represents a 406 Not Acceptable error.
+ */
+class NotAcceptableException extends HttpException
+{
+    protected $code = 406;
+    protected $message = "Not Acceptable";
 }
 
 /**
@@ -90,10 +86,8 @@ class MethodNotAllowedException extends HttpException
  */
 class ConflictException extends HttpException
 {
-    /** @var int HTTP Status Code */
     protected $code = 409;
-    /** @var string Default description for the error */
-    protected $message = "409 Conflict";
+    protected $message = "Conflict";
 }
 
 /**
@@ -101,8 +95,60 @@ class ConflictException extends HttpException
  */
 class GoneException extends HttpException
 {
-    /** @var int HTTP Status Code */
     protected $code = 410;
-    /** @var string Default description for the error */
-    protected $message = "410 Gone";
+    protected $message = "Gone";
+}
+
+/**
+ * Represents a 411 Length Required error.
+ */
+class LengthRequiredException extends HttpException
+{
+    protected $code = 411;
+    protected $message = "Length Required";
+}
+
+/**
+ * Represents a 412 Precondition Failed error.
+ */
+class PreconditionFailedException extends HttpException
+{
+    protected $code = 412;
+    protected $message = "Precondition Failed";
+}
+
+/**
+ * Represents a 413 Request Entity Too Large error.
+ */
+class RequestEntityTooLargeException extends HttpException
+{
+    protected $code = 413;
+    protected $message = "Request Entity Too Large";
+}
+
+/**
+ * Represents a 415 Unsupported Media Type error.
+ */
+class UnsupportedMediaTypeException extends HttpException
+{
+    protected $code = 415;
+    protected $message = "Unsupported Media Type";
+}
+
+/**
+ * Represents a 416 Requested Range Not Satisfiable error.
+ */
+class RequestedRangeNotSatisfiableException extends HttpException
+{
+    protected $code = 416;
+    protected $message = "Requested Range Not Satisfiable";
+}
+
+/**
+ * Represents a 417 Expectation Failed error.
+ */
+class ExpectationFailedException extends HttpException
+{
+    protected $code = 417;
+    protected $message = "Expectation Failed";
 }
